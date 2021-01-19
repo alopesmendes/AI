@@ -11,5 +11,33 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="sbt: com.github.andrewoma.dexx:collection:0.7:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.github.javafaker:javafaker:1.0.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.github.mifmif:generex:1.0.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: commons-cli:commons-cli:1.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: commons-codec:commons-codec:1.15:jar" level="project" />
+    <orderEntry type="library" name="sbt: commons-io:commons-io:2.8.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: dk.brics.automaton:automaton:1.11-8:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.commons:commons-compress:1.20:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.commons:commons-csv:1.8:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.commons:commons-lang3:3.11:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.jena:jena-base:3.17.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.jena:jena-core:3.17.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.jena:jena-iri:3.17.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.jena:jena-shaded-guava:3.17.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.scala-lang:scala-library:2.13.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.slf4j:slf4j-api:1.7.30:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.yaml:snakeyaml:1.23:android:jar" level="project" />
+    <orderEntry type="module-library">
+      <library name="sbt: unmanaged-sources-and-docs">
+        <CLASSES />
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/yaml/snakeyaml/1.23/snakeyaml-1.23-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/yaml/snakeyaml/1.23/snakeyaml-1.23-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
