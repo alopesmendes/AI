@@ -1,0 +1,17 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging /home/lopes/git/AI/CovidFaker/target/scala-2.13/covidfaker_2.13-0.1.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/lopes/git/AI/CovidFaker/target/scala-2.13/classes/Main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Gender$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/lopes/git/AI/CovidFaker/target/scala-2.13/classes/Gender$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Gender$Female$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/lopes/git/AI/CovidFaker/target/scala-2.13/classes/Gender$Female$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Gender$Male$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/lopes/git/AI/CovidFaker/target/scala-2.13/classes/Gender$Male$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/lopes/git/AI/CovidFaker/target/scala-2.13/classes/Main$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/lopes/git/AI/CovidFaker/target/scala-2.13/classes/Main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Gender.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/lopes/git/AI/CovidFaker/target/scala-2.13/classes/Gender.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
