@@ -1,0 +1,303 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#"
+     xml:base="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_birthday -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_birthday">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_first_name -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_first_name">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_gender -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_gender">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_id -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_id">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_last_name -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_last_name">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_zipcode -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_zipcode">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Age -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Age">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#PersonAttributes"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Female -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Female">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Gender"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Male"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#First_name -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#First_name">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#PersonAttributes"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Gender -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Gender">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#PersonAttributes"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Id -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Id">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#PersonAttributes"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Last_name -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Last_name">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#PersonAttributes"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Male -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Male">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Gender"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Person -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Person">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_id"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Id"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Vaccine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#PersonAttributes -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#PersonAttributes"/>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Professor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Professor">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_gender"/>
+                                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Female"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_gender"/>
+                                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Male"/>
+                            </owl:Restriction>
+                        </owl:unionOf>
+                    </owl:Class>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_first_name"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#First_name"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_id"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Id"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_last_name"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Last_name"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_zipcode"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Zipcode"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_birthday"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">30</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Age"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_birthday"/>
+                        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">70</owl:maxQualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Age"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Person"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Student"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Student -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Student">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_gender"/>
+                                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Female"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_gender"/>
+                                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Male"/>
+                            </owl:Restriction>
+                        </owl:unionOf>
+                    </owl:Class>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_first_name"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#First_name"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_id"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Id"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_last_name"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Last_name"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_zipcode"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Zipcode"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_birthday"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">20</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Age"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_birthday"/>
+                        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">30</owl:maxQualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Age"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Vaccine -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Vaccine"/>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Zipcode -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Zipcode">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#PersonAttributes"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Age"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#First_name"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Gender"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Id"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Last_name"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Zipcode"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
