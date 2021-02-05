@@ -81,19 +81,24 @@ object Main extends App {
         val p4 = anotherModel.createProperty(zipcode)
         val o4 = anotherModel.createResource(faker.address().zipCode())
 
+        val p5 = anotherModel.createProperty(gender)
+        val o5 = anotherModel.createResource(Gender.randomGender().sex)
+
         val statement = anotherModel.createStatement(s, p, o)
         val statement1 = anotherModel.createStatement(s, p1, o1)
         val statement2 = anotherModel.createStatement(s, p2, o2)
         val statement3 = anotherModel.createStatement(s, p3, o3)
         val statement4 = anotherModel.createStatement(s, p4, o4)
+        val statement5 = anotherModel.createStatement(s, p5, o5)
 
         anotherModel.add(statement)
         anotherModel.add(statement1)
         anotherModel.add(statement2)
         anotherModel.add(statement3)
         anotherModel.add(statement4)
+        anotherModel.add(statement5)
     })
     println("rdf dataset size = " + anotherModel.size())
-    //    anotherModel.listStatements().forEach(println)
+    anotherModel.listStatements().forEach(println)
 
 }

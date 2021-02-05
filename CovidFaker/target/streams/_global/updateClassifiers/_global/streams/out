@@ -1,3 +1,4 @@
-[debug] not up to date. inChanged = true, force = false
-[debug] Updating ProjectRef(uri("file:/C:/Users/jchu9/Documents/GitHub/AI/CovidFaker/"), "covidfaker")...
-[debug] Done updating ProjectRef(uri("file:/C:/Users/jchu9/Documents/GitHub/AI/CovidFaker/"), "covidfaker")
+[warn] scala-library-2.13.4-sources.jar no longer exists at /C:/Users/jchu9/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.4/scala-library-2.13.4-sources.jar
+[debug] not up to date. inChanged = false, force = false
+[debug] Updating ProjectRef(uri("file:/home/lopes/git/AI/CovidFaker/"), "covidfaker")...
+[debug] Done updating ProjectRef(uri("file:/home/lopes/git/AI/CovidFaker/"), "covidfaker")
