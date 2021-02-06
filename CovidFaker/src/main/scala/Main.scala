@@ -1,9 +1,11 @@
 import com.github.javafaker.Faker
 import org.apache.jena.rdf.model.{ModelFactory, Resource}
+
 import scala.jdk.CollectionConverters._
+import scala.util.Random
 
 object Main extends App {
-
+    val random = new Random()
     val model = ModelFactory.createDefaultModel()
     model.read("file:lubm1.ttl", "TTL")
     println(model.size())
@@ -58,6 +60,9 @@ object Main extends App {
     val birthday = "http://swat.cse.lehigh.edu/onto/univ-bench.owl#birthday"
     val zipcode = "http://swat.cse.lehigh.edu/onto/univ-bench.owl#zipcode"
 
+    // donnees pour les vaccins
+    val vaccine = "http://swat.cse.lehigh.edu/onto/univ-bench.owl#vaccine"
+
     val anotherModel = ModelFactory.createDefaultModel()
     listOfPersons().foreach(person => {
         val s = anotherModel.createResource(person.toString)
@@ -84,12 +89,16 @@ object Main extends App {
         val p5 = anotherModel.createProperty(gender)
         val o5 = anotherModel.createResource(Gender.randomGender().sex)
 
+        val p6 = anotherModel.createProperty(vaccine)
+        val o6 = anotherModel.createResource(Vaccine.randomVaccine().name)
+
         val statement = anotherModel.createStatement(s, p, o)
         val statement1 = anotherModel.createStatement(s, p1, o1)
         val statement2 = anotherModel.createStatement(s, p2, o2)
         val statement3 = anotherModel.createStatement(s, p3, o3)
         val statement4 = anotherModel.createStatement(s, p4, o4)
         val statement5 = anotherModel.createStatement(s, p5, o5)
+        val statement6 = anotherModel.createStatement(s, p6, o6)
 
         anotherModel.add(statement)
         anotherModel.add(statement1)
@@ -97,8 +106,9 @@ object Main extends App {
         anotherModel.add(statement3)
         anotherModel.add(statement4)
         anotherModel.add(statement5)
+        anotherModel.add(statement6)
     })
     println("rdf dataset size = " + anotherModel.size())
-    anotherModel.listStatements().forEach(println)
+    //anotherModel.listStatements().forEach(println)
 
 }
