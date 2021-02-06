@@ -33,15 +33,26 @@ object Vaccine {
         override val name: String = "CanSinoBio"
     }
 
-    def isVaccin(vaccine: Vaccine): Boolean = {
-        val number = random.nextInt(100)
-        number <= vaccine.percentage
+    case object Nil extends Vaccine {
+        override val percentage: Double = 0
+        override val name: String = "Nil"
     }
 
-    def seqOf() : Seq[Vaccine] = Seq(Pfizer, Moderna, AstraZeneca, SpoutnikV, CanSinoBio)
+
+    private def seqOf() : Seq[Vaccine] = Seq(Pfizer, Moderna, AstraZeneca, SpoutnikV, CanSinoBio)
+
+    private def isVaccine() : Boolean = random.nextInt(100) <= 69
 
     def randomVaccine() : Vaccine = {
-        val seq = seqOf()
-        seq(random.nextInt(seq.size))
+        if (isVaccine()) {
+            val seq = seqOf()
+            seq(random.nextInt(seq.size))
+        } else {
+            Nil
+        }
+    }
+
+    def toUri(baseUri : String, vaccine: Vaccine): String = {
+        return s"$baseUri${vaccine.name}"
     }
 }

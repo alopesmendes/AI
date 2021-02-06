@@ -23,4 +23,8 @@ object Gender {
             case false => Female
         }
     }
+
+    def toUri(baseUri : String, gender: Gender): String = {
+        return s"$baseUri${gender.sex}"
+    }
 }

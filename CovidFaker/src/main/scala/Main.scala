@@ -1,17 +1,18 @@
 import com.github.javafaker.Faker
 import org.apache.jena.rdf.model.{ModelFactory, Resource}
 
+import java.text.SimpleDateFormat
 import scala.jdk.CollectionConverters._
-import scala.util.Random
 
 object Main extends App {
-    val random = new Random()
     val model = ModelFactory.createDefaultModel()
     model.read("file:lubm1.ttl", "TTL")
-    println(model.size())
+    //println(model.size())
 
     //    premiere utilisation de Faker
+
     val faker = new Faker()
+    /*
     val name = faker.name().fullName()
     val fName = faker.name().firstName()
     val lName = faker.name().lastName()
@@ -20,6 +21,8 @@ object Main extends App {
     println(fName)
     println(lName)
     println(streetAddress)
+
+     */
 
     //    recuperation de la liste des personnes
     val typeProperty = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
@@ -53,62 +56,87 @@ object Main extends App {
     println(listOfPersons().size)
 
     //    ajout de donnees pour les personnes
-    val id = "http://swat.cse.lehigh.edu/onto/univ-bench.owl#id"
-    val firstName = "http://swat.cse.lehigh.edu/onto/univ-bench.owl#firstName"
-    val lastName = "http://swat.cse.lehigh.edu/onto/univ-bench.owl#lastName"
-    val gender = "http://swat.cse.lehigh.edu/onto/univ-bench.owl#gender"
-    val birthday = "http://swat.cse.lehigh.edu/onto/univ-bench.owl#birthday"
-    val zipcode = "http://swat.cse.lehigh.edu/onto/univ-bench.owl#zipcode"
+    val id = "http://extension.group1.fr/onto#id"
+    val firstName = "http://extension.group1.fr/onto#firstName"
+    val lastName = "http://extension.group1.fr/onto#lastName"
+    val gender = "http://extension.group1.fr/onto#gender"
+    val birthday = "http://extension.group1.fr/onto#birthday"
+    val zipcode = "http://extension.group1.fr/onto#zipcode"
 
     // donnees pour les vaccins
     val vaccine = "http://swat.cse.lehigh.edu/onto/univ-bench.owl#vaccine"
+    val baseUri = "http://extension.group1.fr/onto#"
 
     val anotherModel = ModelFactory.createDefaultModel()
+    val map = PersonAttribute.toUri(baseUri)
     listOfPersons().foreach(person => {
-        val s = anotherModel.createResource(person.toString)
+        val s = PersonModel.resource(person.toString)
+        val idAttributes = PersonModel.add(
+            map.get(PersonAttribute.Id).get,
+            m => m.createLiteral(faker.idNumber().valid())
+        )
 
-        val p = anotherModel.createProperty(id)
-        val o = anotherModel.createResource(faker.idNumber().valid())
+        val firstNameAttributes = PersonModel.add(
+            map.get(PersonAttribute.FirstName).get,
+            m => m.createLiteral(faker.name().firstName())
+        )
 
-        val p1 = anotherModel.createProperty(firstName)
-        val o1 = anotherModel.createResource(faker.name().firstName())
+        val lastNameAttributes = PersonModel.add(
+            map.get(PersonAttribute.LastName).get,
+            m => m.createLiteral(faker.name().lastName())
+        )
 
-        val p2 = anotherModel.createProperty(lastName)
-        val o2 = anotherModel.createResource(faker.name().lastName())
+        val genderAttributes = PersonModel.add(
+            map.get(PersonAttribute.Gender).get,
+            m => m.createResource(Gender.toUri(baseUri, Gender.randomGender()))
+        )
 
-        val p3 = anotherModel.createProperty(birthday)
-        val o3 =
-            if (person.toString.contains("Student"))
-                anotherModel.createResource(faker.date().birthday(20, 30).toString)
-            else
-                anotherModel.createResource(faker.date().birthday(30, 70).toString)
 
-        val p4 = anotherModel.createProperty(zipcode)
-        val o4 = anotherModel.createResource(faker.address().zipCode())
+        val birthdayAttributes = PersonModel.add(
+            map.get(PersonAttribute.Birthday).get,
+            m => {
+                if (person.toString.contains("Student"))
+                    anotherModel.createLiteral(faker.date().birthday(20, 30).toString)
+                else
+                    anotherModel.createLiteral(faker.date().birthday(30, 70).toString)
+            }
+        )
 
-        val p5 = anotherModel.createProperty(gender)
-        val o5 = anotherModel.createResource(Gender.randomGender().sex)
+        val zipcodeAttributes = PersonModel.add(
+            map.get(PersonAttribute.Zipcode).get,
+            m => m.createLiteral(faker.address().zipCode())
+        )
 
-        val p6 = anotherModel.createProperty(vaccine)
-        val o6 = anotherModel.createResource(Vaccine.randomVaccine().name)
+        val vaccineAttributes = PersonModel.add(
+            map.get(PersonAttribute.Vaccin).get,
+            m => {
+                val randomVaccine = Vaccine.randomVaccine()
+                m.createResource(Vaccine.toUri(baseUri, randomVaccine))
+            }
+        )
 
-        val statement = anotherModel.createStatement(s, p, o)
-        val statement1 = anotherModel.createStatement(s, p1, o1)
-        val statement2 = anotherModel.createStatement(s, p2, o2)
-        val statement3 = anotherModel.createStatement(s, p3, o3)
-        val statement4 = anotherModel.createStatement(s, p4, o4)
-        val statement5 = anotherModel.createStatement(s, p5, o5)
-        val statement6 = anotherModel.createStatement(s, p6, o6)
+        val sdf = new SimpleDateFormat("dd/MM/yyyy")
+        val january  = sdf.parse("01/01/2021")
+        val february = sdf.parse("01/02/2021")
+        val vaccineDateAttributes = PersonModel.add(
+            map.get(PersonAttribute.VaccineDate).get,
+            m => m.createLiteral(faker.date().between(january, february).toString)
+        )
 
-        anotherModel.add(statement)
-        anotherModel.add(statement1)
-        anotherModel.add(statement2)
-        anotherModel.add(statement3)
-        anotherModel.add(statement4)
-        anotherModel.add(statement5)
-        anotherModel.add(statement6)
+        PersonModel.addStatement(s, idAttributes._1, idAttributes._2)
+        PersonModel.addStatement(s, firstNameAttributes._1, firstNameAttributes._2)
+        PersonModel.addStatement(s, lastNameAttributes._1, lastNameAttributes._2)
+        PersonModel.addStatement(s, genderAttributes._1, genderAttributes._2)
+        PersonModel.addStatement(s, birthdayAttributes._1, birthdayAttributes._2)
+        PersonModel.addStatement(s, zipcodeAttributes._1, zipcodeAttributes._2)
+
+        if (vaccineAttributes._2.getLocalName != Vaccine.Nil.name) {
+            PersonModel.addStatement(s, vaccineAttributes._1, vaccineAttributes._2)
+            PersonModel.addStatement(s, vaccineDateAttributes._1, vaccineDateAttributes._2)
+        }
     })
-    println("rdf dataset size = " + anotherModel.size())
-    //anotherModel.listStatements().forEach(println)
+    println("rdf dataset size = " + PersonModel.model.size())
+    ModelFileWriter.write("modelVaccine.rdf", PersonModel.model)
+    //PersonModel.model.listStatements().forEach(println)
 
 }
