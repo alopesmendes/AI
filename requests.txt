@@ -1,0 +1,10 @@
+1.
+SELECT (COUNT(?s) AS ?triples)
+WHERE { ?s <http://extension.group1.fr/onto#vaccine> ?o }
+
+2.
+SELECT ?o (COUNT(?s) AS ?triples)
+WHERE { ?s <http://extension.group1.fr/onto#vaccine> ?o }
+GROUP BY ?o
+
+3.
