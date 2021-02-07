@@ -8,3 +8,8 @@ WHERE { ?s <http://extension.group1.fr/onto#vaccine> ?o }
 GROUP BY ?o
 
 3.
+SELECT ?s ?p ?o
+WHERE {
+  ?s ?p ?o .
+  filter (regex (str(?s), "AssociateProfessor")) .
+  }
