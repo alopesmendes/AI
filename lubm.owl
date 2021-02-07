@@ -102,9 +102,41 @@
     
 
 
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#AstraZeneca -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#AstraZeneca">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Covid19Vaccine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#CanSinoBio -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#CanSinoBio">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Covid19Vaccine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Covid19Vaccine -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Covid19Vaccine">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Vaccine"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Gender -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Gender"/>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Moderna -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Moderna">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Covid19Vaccine"/>
+    </owl:Class>
     
 
 
@@ -125,7 +157,46 @@
                 </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_birthday"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_firstname"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_id"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_lastname"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#has_zipcode"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Vaccine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Pfizer -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Pfizer">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Covid19Vaccine"/>
     </owl:Class>
     
 
@@ -135,6 +206,14 @@
     <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Professor">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Person"/>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Student"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#SpoutnikV -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#SpoutnikV">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Covid19Vaccine"/>
     </owl:Class>
     
 
@@ -232,6 +311,16 @@
         </owl:intersectionOf>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Student"/>
     </owl:Class>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#AstraZeneca"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#CanSinoBio"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Moderna"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#Pfizer"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/jchu9/ontologies/2021/0/untitled-ontology-5#SpoutnikV"/>
+        </owl:members>
+    </rdf:Description>
 </rdf:RDF>
 
 

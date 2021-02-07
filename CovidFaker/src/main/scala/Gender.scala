@@ -9,6 +9,7 @@ object Gender {
 
     case object Male extends Gender {
         override val sex: String = "male"
+        val percentage = 48
     }
 
     case object Female extends Gender {
@@ -16,10 +17,14 @@ object Gender {
     }
 
     def randomGender(): Gender = {
-        val value = random.nextBoolean()
+        val value = random.nextInt(100) <= Male.percentage
         value match {
             case true => Male
             case false => Female
         }
+    }
+
+    def toUri(baseUri : String, gender: Gender): String = {
+        return s"$baseUri${gender.sex}"
     }
 }
