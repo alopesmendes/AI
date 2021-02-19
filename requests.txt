@@ -8,8 +8,64 @@ WHERE { ?s <http://extension.group1.fr/onto#vaccine> ?o }
 GROUP BY ?o
 
 3.
-SELECT ?s ?p ?o
+SELECT DISTINCT ?s
 WHERE {
-  ?s ?p ?o .
-  filter (regex (str(?s), "AssociateProfessor")) .
-  }
+  
+  ?s <http://swat.cse.lehigh.edu/onto/univ-bench.owl#worksFor> ?o. 
+  filter (regex (str(?s), "AssociateProfessor")).
+  ?s <http://swat.cse.lehigh.edu/onto/univ-bench.owl#teacherOf> ?o2
+  
+} ORDER BY ?s
+
+///
+4.1
+
+SELECT DISTINCT ?s ?o1 ?o2 
+WHERE {
+  
+  ?s ?p ?o. 
+  filter (regex (str(?s), "Professor") || regex (str(?s), "Lecturer")).
+  ?s <http://extension.group1.fr/onto#firstname> ?o1.
+  ?s <http://extension.group1.fr/onto#lastname> ?o2
+  
+}
+540
+
+4.2
+SELECT DISTINCT ?o ?fName ?lName
+WHERE {
+  
+  ?s <http://swat.cse.lehigh.edu/onto/univ-bench.owl#advisor> ?o.
+  ?o <http://extension.group1.fr/onto#firstname> ?fName.
+  ?o <http://extension.group1.fr/onto#lastname> ?lName
+  
+}
+445
+
+4.3
+SELECT DISTINCT ?s ?fName ?lName ?o
+WHERE {
+  
+  ?s <http://swat.cse.lehigh.edu/onto/univ-bench.owl#worksFor> ?o.
+  filter (regex (str(?s), "Professor") || regex (str(?s), "Lecturer")).
+  ?s <http://extension.group1.fr/onto#firstname> ?fName.
+  ?s <http://extension.group1.fr/onto#lastname> ?lName
+  
+}
+540
+
+4.4
+SELECT DISTINCT ?o ?fName ?lName
+WHERE {
+
+  ?s <http://swat.cse.lehigh.edu/onto/univ-bench.owl#advisor> ?o.
+  ?o <http://swat.cse.lehigh.edu/onto/univ-bench.owl#worksFor> ?o2.
+  filter (regex (str(?o), "Professor") || regex (str(?o), "Lecturer")).
+  ?o <http://extension.group1.fr/onto#firstname> ?fName.
+  ?o <http://extension.group1.fr/onto#lastname> ?lName
+  
+}
+445
+
+
+
