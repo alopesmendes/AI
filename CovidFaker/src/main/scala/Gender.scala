@@ -1,3 +1,5 @@
+import URI.baseUri
+
 import scala.util.Random
 
 trait Gender {
@@ -24,7 +26,7 @@ object Gender {
         }
     }
 
-    def toUri(baseUri : String, gender: Gender): String = {
+    def toUri(gender: Gender): String = {
         return s"$baseUri${gender.sex}"
     }
 }

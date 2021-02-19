@@ -1,3 +1,5 @@
+import URI.baseUri
+
 import scala.util.Random
 
 trait Vaccine {
@@ -52,7 +54,7 @@ object Vaccine {
         }
     }
 
-    def toUri(baseUri : String, vaccine: Vaccine): String = {
-        return s"$baseUri${vaccine.name}"
+    def toUri(vaccine: Vaccine): String = {
+        s"$baseUri${vaccine.name}"
     }
 }

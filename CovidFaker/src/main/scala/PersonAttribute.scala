@@ -1,3 +1,5 @@
+import URI.baseUri
+
 trait PersonAttribute {
     val name : String
 }
@@ -36,7 +38,7 @@ object PersonAttribute {
         override val name: String = "vaccinationDate"
     }
 
-    def toUri(baseUri : String) : Map[PersonAttribute, String] = {
+    def toUri() : Map[PersonAttribute, String] = {
         Map(
             Id -> s"$baseUri${Id.name}",
             FirstName -> s"$baseUri${FirstName.name}",
