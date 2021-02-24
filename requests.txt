@@ -8,7 +8,9 @@ WHERE { ?s <http://extension.group1.fr/onto#vaccine> ?o }
 GROUP BY ?o
 
 3.
-SELECT DISTINCT ?s
+// L'explain de la ressource data
+
+DESCRIBE ?s
 WHERE {
   
   ?s <http://swat.cse.lehigh.edu/onto/univ-bench.owl#worksFor> ?o. 
@@ -16,7 +18,6 @@ WHERE {
   ?s <http://swat.cse.lehigh.edu/onto/univ-bench.owl#teacherOf> ?o2
   
 } ORDER BY ?s
-
 ///
 4.1
 
