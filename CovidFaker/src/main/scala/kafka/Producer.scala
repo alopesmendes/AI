@@ -2,6 +2,9 @@ package kafka
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.twitter.bijection.avro.GenericAvroCodecs
+import com.twitter.bijection.Injection
+import org.apache.avro.generic.GenericData
+import org.apache.avro.generic.GenericRecord
 import org.apache.avro.Schema
 import org.apache.jena.rdf.model.Model
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
@@ -32,12 +35,8 @@ object Producer {
 
     val schema: Schema = new Schema.Parser().parse(jsonFormatSchema)
 
-    import com.twitter.bijection.Injection
-    import org.apache.avro.generic.GenericRecord
-
     val recordInjection : Injection[GenericRecord, Array[Byte]] = GenericAvroCodecs.toBinary(schema)
 
-    import org.apache.avro.generic.GenericData
     val avroRecord = new GenericData.Record(schema)
 
     /***
