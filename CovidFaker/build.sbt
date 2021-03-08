@@ -22,3 +22,9 @@ libraryDependencies += "com.blazegraph" % "bigdata-core" % "2.1.4"
 // https://mvnrepository.com/artifact/com.blazegraph/bigdata-client
 libraryDependencies += "com.blazegraph" % "bigdata-client" % "2.1.4"
 
+libraryDependencies += "org.apache.avro"  %  "avro"  %  "1.7.7"
+
+// https://mvnrepository.com/artifact/com.twitter/bijection-core
+libraryDependencies += "com.twitter" %% "bijection-core" % "0.9.7"
+
+
