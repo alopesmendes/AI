@@ -27,4 +27,7 @@ libraryDependencies += "org.apache.avro"  %  "avro"  %  "1.7.7"
 // https://mvnrepository.com/artifact/com.twitter/bijection-core
 libraryDependencies += "com.twitter" %% "bijection-core" % "0.9.7"
 
+// https://mvnrepository.com/artifact/com.twitter/bijection-avro
+libraryDependencies += "com.twitter" %% "bijection-avro" % "0.9.7"
+
 

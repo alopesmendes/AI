@@ -172,11 +172,11 @@ object Vaccine {
      */
     def findVaccine(url : String): Vaccine = {
         url match {
-            case s"${URI.baseUri}${Pfizer.name}" => Pfizer
-            case s"${URI.baseUri}${Moderna.name}" => Moderna
-            case s"${URI.baseUri}${AstraZeneca.name}" => AstraZeneca
-            case s"${URI.baseUri}${SpoutnikV.name}" => SpoutnikV
-            case s"${URI.baseUri}${CanSinoBio.name}" => CanSinoBio
+            case s"${URI.baseUri}Pfizer" => Pfizer
+            case s"${URI.baseUri}Moderna" => Moderna
+            case s"${URI.baseUri}AstraZeneca" => AstraZeneca
+            case s"${URI.baseUri}SpoutnikV" => SpoutnikV
+            case s"${URI.baseUri}CanSinoBio" => CanSinoBio
             case _ => Nil
         }
     }

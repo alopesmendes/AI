@@ -16,11 +16,11 @@ object Consumer {
         properties.put("bootstrap.servers", "localhost:9092")
         properties.put("group.id", "mygroup")
         properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
-        properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
+        properties.put("value.deserializer", "org.apache.kafka.common.serialization.ByteArrayDeserializer")
         properties
     }
 
-    val consumer = new KafkaConsumer[String, String](streamConsumer)
+    val consumer = new KafkaConsumer[String, Array[Byte]](streamConsumer)
 
     /***
      * Display's all the consumers.
@@ -35,7 +35,7 @@ object Consumer {
             consumerRecord.forEach((record) => {
 
                 System.out.println("Record Key " + record.key)
-                System.out.println("Record value " + record.value)
+                System.out.println("Record value " + new String(record.value))
                 System.out.println("Record partition " + record.partition)
                 System.out.println("Record offset " + record.offset)
 
