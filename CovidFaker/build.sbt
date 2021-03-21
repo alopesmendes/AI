@@ -30,4 +30,7 @@ libraryDependencies += "com.twitter" %% "bijection-core" % "0.9.7"
 // https://mvnrepository.com/artifact/com.twitter/bijection-avro
 libraryDependencies += "com.twitter" %% "bijection-avro" % "0.9.7"
 
+// https://mvnrepository.com/artifact/org.apache.kafka/kafka-streams
+libraryDependencies += "org.apache.kafka" % "kafka-streams" % "2.7.0"
+
 

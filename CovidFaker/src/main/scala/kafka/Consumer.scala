@@ -16,26 +16,26 @@ object Consumer {
         properties.put("bootstrap.servers", "localhost:9092")
         properties.put("group.id", "mygroup")
         properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
-        properties.put("value.deserializer", "org.apache.kafka.common.serialization.ByteArrayDeserializer")
+        properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
         properties
     }
 
-    val consumer = new KafkaConsumer[String, Array[Byte]](streamConsumer)
+    val consumer = new KafkaConsumer[String, String](streamConsumer)
 
     /***
      * Display's all the consumers.
      */
-    def consumeDisplay : Unit = {
-        consumer.subscribe(util.Arrays.asList("test"))
+    def consumeDisplay(list: util.List[String]) : Unit = {
+        consumer.subscribe(list)
         while (true) {
-            val consumerRecord = consumer.poll(100)
+            val consumerRecord = consumer.poll(200)
             if (consumerRecord.isEmpty) {
                 return
             }
             consumerRecord.forEach((record) => {
 
                 System.out.println("Record Key " + record.key)
-                System.out.println("Record value " + new String(record.value))
+                System.out.println("Record value " + record.value)
                 System.out.println("Record partition " + record.partition)
                 System.out.println("Record offset " + record.offset)
 

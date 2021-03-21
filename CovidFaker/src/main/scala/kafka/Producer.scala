@@ -1,13 +1,10 @@
 package kafka
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.twitter.bijection.avro.GenericAvroCodecs
-import org.apache.avro.Schema
 import org.apache.jena.rdf.model.Model
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 
 import java.io.StringWriter
-import java.nio.file.{Files, Paths}
 import java.util.Properties
 
 object Producer {
@@ -22,12 +19,12 @@ object Producer {
         val properties = new Properties
         properties.put("bootstrap.servers", "localhost:9092")
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
-        properties.put("value.serializer", "org.apache.kafka.common.serialization.ByteArraySerializer")
+        properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
         properties
     }
 
-    val producer = new KafkaProducer[String, Array[Byte]](streamProducer)
-
+    val producer = new KafkaProducer[String, String](streamProducer)
+    /*
     val jsonFormatSchema = new String(Files.readAllBytes(Paths.get("src/main/resources/schema.avsc")))
 
     val schema: Schema = new Schema.Parser().parse(jsonFormatSchema)
@@ -40,30 +37,33 @@ object Producer {
     import org.apache.avro.generic.GenericData
     val avroRecord = new GenericData.Record(schema)
 
+    */
+    /*
+    val streamConfig = new StreamsConfig(streamProducer)
+    val serde = Serdes.ByteArray()
+
+     */
+
     /***
      * Will parse and send the value.
      * @param mapper will parse to a json
      * @param model the Model
      * @param value the ProducerValue
      */
-    def send(mapper: ObjectMapper, model: Model, value : ProducerValue): Unit = {
-        /*
-        import org.apache.kafka.clients.producer.ProducerRecord
-        mapper.writeValue(out, value)
+    def send(mapper: ObjectMapper, model: Model, topic : String, map: Map[String, String]): Unit = {
+        mapper.writeValue(out, map)
         val json = out.toString()
-
-         */
-        avroRecord.put("id", value.id)
-        avroRecord.put("fName", value.fName)
-        avroRecord.put("lName", value.lName)
-        avroRecord.put("vaccinationDate", value.vaccinationDate)
-        avroRecord.put("vaccine", value.vaccine)
-        avroRecord.put("sideEffectName", value.sideEffect.name)
-        avroRecord.put("sideEffectCode", value.sideEffect.sideCode)
+        /*
+        map.foreachEntry((k, v) => {
+            avroRecord.put(k, v)
+        })
 
         val byteArray = recordInjection.apply(avroRecord)
-        val record = new ProducerRecord[String, Array[Byte]]("test", "key", byteArray)
+        val record = new ProducerRecord[String, Array[Byte]](topic, "key", byteArray)
+        */
+
+        val record = new ProducerRecord[String, String](topic, "key", json)
         producer.send( record )
-        //println("producing " + json)
+        println("producing " + json)
     }
 }

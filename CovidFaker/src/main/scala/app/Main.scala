@@ -2,13 +2,14 @@ package app
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
-import kafka.{Consumer, Producer, ProducerValue}
+import kafka.{Consumer, Producer}
 import load.Load
 import org.apache.jena.rdf.model.{ModelFactory, Resource}
 import person.URI.{persons, typeProperty}
 import person.Vaccine.SideEffects
 import person.{PersonAttribute, Vaccine}
 
+import java.util
 import scala.jdk.CollectionConverters.CollectionHasAsScala
 
 
@@ -69,6 +70,7 @@ object Main extends App {
 
     // Method will load the file using blaze then entering the query.
     // The last parameter will be a function that takes the results of the query and returns Unit
+    /*
     Load.load("/modelVaccine.rdf", "select ?id ?fName ?lName ?vaccinationDate ?o where {" +
         "?s <http://extension.group1.fr/onto#vaccine> ?o."+
         s"?s <http://extension.group1.fr/onto#id> ?id."+
@@ -92,15 +94,62 @@ object Main extends App {
                 if (sideEffect != SideEffects.Nil && vaccine != Vaccine.Nil) {
 
                     //val bi = Bijection[GenericRecord, String](genericRecord)
-                    val producerValue = ProducerValue(id, fName, lName, vaccinationDate, vaccine.name, sideEffect)
-                    Producer.send(mapper, modelRDF, producerValue)
+                    Producer.send(mapper, modelRDF, "test",
+                        Map(
+                            "id" -> id,
+                            "fName" -> fName,
+                            "lName" -> lName,
+                            "vaccinationDate" -> vaccinationDate,
+                            "vaccine" -> vaccine.name,
+                            "sideEffectName" -> sideEffect.name,
+                            "sideEffectCode" -> sideEffect.sideCode
+                        )
+                    )
                 }
             }
             finally result.close()
         }
     )
 
-    Consumer.consumeDisplay
+    */
+
+    Load.load("/modelVaccine.rdf", "select ?id ?birthday ?o where {" +
+    "?s <http://extension.group1.fr/onto#vaccine> ?o."+
+    s"?s <http://extension.group1.fr/onto#id> ?id."+
+    s"?s <http://extension.group1.fr/onto#${PersonAttribute.Birthday.name}> ?birthday."+
+    "}",
+        result => {
+            try while ( {
+                result.hasNext
+            }) {
+                // will send a ProducerValue if there's a sideEffect see Vaccine for more details.
+                val bs = result.next
+                val id = bs.getValue("id").stringValue()
+                val birthday = bs.getValue("birthday").stringValue()
+                val obj = bs.getValue("o").stringValue()
+                val vaccine = Vaccine.findVaccine(obj)
+                val sideEffect = Vaccine.SideEffects.randomSideEffect(vaccine)
+                if (sideEffect != SideEffects.Nil && vaccine != Vaccine.Nil) {
+
+                    //val bi = Bijection[GenericRecord, String](genericRecord)
+                    Producer.send(mapper, modelRDF, "test2",
+                        Map(
+                            "id" -> id,
+                            "birthday" -> birthday,
+                            "vaccine" -> vaccine.name,
+                            "sideEffectName" -> sideEffect.name,
+                            "sideEffectCode" -> sideEffect.sideCode
+                        )
+                    )
+                }
+            }
+            finally result.close()
+        }
+    )
+
+
+
+    Consumer.consumeDisplay(util.Arrays.asList("test2"))
 
     Producer.producer.close()
 
