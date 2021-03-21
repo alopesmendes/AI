@@ -29,12 +29,8 @@ object Producer {
 
     val schema: Schema = new Schema.Parser().parse(jsonFormatSchema)
 
-    import com.twitter.bijection.Injection
-    import org.apache.avro.generic.GenericRecord
-
     val recordInjection : Injection[GenericRecord, Array[Byte]] = GenericAvroCodecs.toBinary(schema)
 
-    import org.apache.avro.generic.GenericData
     val avroRecord = new GenericData.Record(schema)
 
     */
