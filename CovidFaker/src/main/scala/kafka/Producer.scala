@@ -1,14 +1,22 @@
 package kafka
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.apache.jena.rdf.model.Model
+import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
+import org.apache.kafka.common.serialization.{Serdes, StringSerializer}
+import org.apache.kafka.streams.StreamsConfig
 
 import java.io.StringWriter
 import java.util.Properties
 
+/**
+ * The Producer send will the messages.
+ * @author Ailton LOPES MENDES
+ * @author Jonathan CHU
+ * @author Fabien LAMBERT--DELAVAQUERIE
+ * @author Gérald LIN
+ */
 object Producer {
-    val out: StringWriter = new StringWriter()
 
     /***
      * Return the properties of a consumer.
@@ -17,9 +25,15 @@ object Producer {
      */
     def streamProducer: Properties = {
         val properties = new Properties
-        properties.put("bootstrap.servers", "localhost:9092")
-        properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
-        properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
+        properties.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka_id")
+        properties.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
+        properties.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0)
+        properties.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String.getClass.getName)
+        properties.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String.getClass.getName)
+        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest")
+        properties.put("key.serializer", classOf[StringSerializer])
+        properties.put("value.serializer", classOf[StringSerializer])
+
         properties
     }
 
@@ -43,12 +57,12 @@ object Producer {
     /***
      * Will parse and send the value.
      * @param mapper will parse to a json
-     * @param model the Model
-     * @param value the ProducerValue
      */
-    def send(mapper: ObjectMapper, model: Model, topic : String, map: Map[String, String]): Unit = {
+    def send(mapper: ObjectMapper, topic : String, map: Map[String, String]): Unit = {
+        val out: StringWriter = new StringWriter()
         mapper.writeValue(out, map)
         val json = out.toString()
+
         /*
         map.foreachEntry((k, v) => {
             avroRecord.put(k, v)
@@ -60,6 +74,8 @@ object Producer {
 
         val record = new ProducerRecord[String, String](topic, "key", json)
         producer.send( record )
+
         println("producing " + json)
+
     }
 }

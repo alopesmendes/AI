@@ -4,6 +4,13 @@ import person.URI.baseUri
 
 import scala.util.Random
 
+/**
+ * Will define the gender.
+ * @author Ailton LOPES MENDES
+ * @author Jonathan CHU
+ * @author Fabien LAMBERT--DELAVAQUERIE
+ * @author Gérald LIN
+ */
 trait Gender {
     val sex : String
 }

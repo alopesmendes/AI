@@ -1,15 +1,20 @@
 package app
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.scala.DefaultScalaModule
-import kafka.{Consumer, Producer}
+import kafka.KStreamUtils.props
+import kafka.Utils._
+import kafka.{Consumer, KStreamUtils, Producer}
 import load.Load
 import org.apache.jena.rdf.model.{ModelFactory, Resource}
+import org.apache.kafka.common.serialization.Serdes
+import org.apache.kafka.streams.kstream.{Consumed, KStream, Produced}
+import org.apache.kafka.streams.{KafkaStreams, StreamsBuilder}
 import person.URI.{persons, typeProperty}
 import person.Vaccine.SideEffects
 import person.{PersonAttribute, Vaccine}
 
 import java.util
+import java.util.concurrent.CountDownLatch
+import scala.annotation.tailrec
 import scala.jdk.CollectionConverters.CollectionHasAsScala
 
 
@@ -22,6 +27,7 @@ object Main extends App {
     def listOfPersons(): List[Resource] = {
         val rdfType = model.createProperty(typeProperty)
 
+        @tailrec
         def aux(lst: List[String], acc: List[Resource]): List[Resource] = {
             lst match {
                 case h :: t => val obj = model.createResource(h)
@@ -55,9 +61,7 @@ object Main extends App {
     val modelRDF = ModelFactory.createDefaultModel()
     modelRDF.read("file:src/main/resources/modelVaccine.rdf", "RDF/XML-ABBREV")
 
-    // Creates JSON mapper will be used for the producer.
-    val mapper = new ObjectMapper()
-    mapper.registerModule(DefaultScalaModule)
+
     /*
     val jsonFormatSchema = new String(Files.readAllBytes(Paths.get("src/main/resources/schema.avsc")))
 
@@ -66,11 +70,6 @@ object Main extends App {
     val genericRecord: GenericRecord = new GenericData.Record(schema)
      */
 
-
-
-    // Method will load the file using blaze then entering the query.
-    // The last parameter will be a function that takes the results of the query and returns Unit
-    /*
     Load.load("/modelVaccine.rdf", "select ?id ?fName ?lName ?vaccinationDate ?o where {" +
         "?s <http://extension.group1.fr/onto#vaccine> ?o."+
         s"?s <http://extension.group1.fr/onto#id> ?id."+
@@ -94,7 +93,7 @@ object Main extends App {
                 if (sideEffect != SideEffects.Nil && vaccine != Vaccine.Nil) {
 
                     //val bi = Bijection[GenericRecord, String](genericRecord)
-                    Producer.send(mapper, modelRDF, "test",
+                    Producer.send(mapper, inputTopic,
                         Map(
                             "id" -> id,
                             "fName" -> fName,
@@ -111,12 +110,10 @@ object Main extends App {
         }
     )
 
-    */
-
     Load.load("/modelVaccine.rdf", "select ?id ?birthday ?o where {" +
-    "?s <http://extension.group1.fr/onto#vaccine> ?o."+
-    s"?s <http://extension.group1.fr/onto#id> ?id."+
-    s"?s <http://extension.group1.fr/onto#${PersonAttribute.Birthday.name}> ?birthday."+
+    "?s <http://extension.group1.fr/onto#vaccine> ?o." +
+    s"?s <http://extension.group1.fr/onto#id> ?id." +
+    s"?s <http://extension.group1.fr/onto#${PersonAttribute.Birthday.name}> ?birthday." +
     "}",
         result => {
             try while ( {
@@ -132,7 +129,7 @@ object Main extends App {
                 if (sideEffect != SideEffects.Nil && vaccine != Vaccine.Nil) {
 
                     //val bi = Bijection[GenericRecord, String](genericRecord)
-                    Producer.send(mapper, modelRDF, "test2",
+                    Producer.send(mapper, inputTopic,
                         Map(
                             "id" -> id,
                             "birthday" -> birthday,
@@ -148,8 +145,56 @@ object Main extends App {
     )
 
 
+    Consumer.consumeDisplay(util.Arrays.asList(outputFilterTopic, outputCountTopic))
 
-    Consumer.consumeDisplay(util.Arrays.asList("test2"))
+    val latch: CountDownLatch = new CountDownLatch(1)
+
+    val builder: StreamsBuilder = new StreamsBuilder
+    val topicStream1: KStream[String, String] = builder.stream(inputTopic, Consumed.`with`(Serdes.String, Serdes.String))
+    val topicStream2: KStream[String, String] = builder.stream(inputTopic2, Consumed.`with`(Serdes.String, Serdes.String))
+    val source = topicStream1.merge(topicStream2)
+
+
+    KStreamUtils.siderCodeStream(source, outputFilterTopic,
+        (key, value) => mapper.readTree(value).get("sideEffectCode").toString.equals("\"C0027497\"")
+    )
+
+
+
+    val sideEffectsStream = KStreamUtils.transform(source,
+        (_, value) => s"${mapper.readTree(value).get("sideEffectCode")}"
+    )
+
+    val perVaccine = KStreamUtils.transform(
+        sideEffectsStream,
+        (key, value) => s"$key/${mapper.readTree(value).get("vaccine")}")
+
+
+    val counts = KStreamUtils.countStream(perVaccine,
+        (key: String, v: String) => {
+            val array = key.split("/").toList
+            array(1)
+        })
+    counts.to(outputCountTopic, Produced.`with`(Serdes.String, Serdes.Long))
+
+    val streams = new KafkaStreams(builder.build, props)
+
+    // attach shutdown handler to catch control-c
+    Runtime.getRuntime.addShutdownHook(new Thread("streams-shutdown-hook") {
+        override def run(): Unit = {
+            streams.close()
+            latch.countDown()
+        }
+    })
+
+
+    try {
+        streams.start()
+        latch.await()
+    } catch {
+        case _: Throwable =>
+            System.exit(1)
+    }
 
     Producer.producer.close()
 

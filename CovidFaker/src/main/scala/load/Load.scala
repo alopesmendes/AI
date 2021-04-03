@@ -7,6 +7,13 @@ import org.openrdf.repository.Repository
 import java.io.InputStreamReader
 import java.util.Properties
 
+/**
+ * Will load the data from file.
+ * @author Ailton LOPES MENDES
+ * @author Jonathan CHU
+ * @author Fabien LAMBERT--DELAVAQUERIE
+ * @author Gérald LIN
+ */
 object Load {
 
     import com.bigdata.rdf.sail.BigdataSailRepository

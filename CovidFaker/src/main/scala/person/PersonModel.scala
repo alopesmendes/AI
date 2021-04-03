@@ -5,6 +5,13 @@ import org.apache.jena.rdf.model.{Model, Property, RDFNode, Resource}
 
 import java.text.SimpleDateFormat
 
+/**
+ * The model for a Person.
+ * @author Ailton LOPES MENDES
+ * @author Jonathan CHU
+ * @author Fabien LAMBERT--DELAVAQUERIE
+ * @author Gérald LIN
+ */
 object PersonModel {
     val faker = new Faker()
     /***
