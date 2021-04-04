@@ -2,6 +2,13 @@ package person
 
 import person.URI.baseUri
 
+/**
+ * The attributes of a person.
+ * @author Ailton LOPES MENDES
+ * @author Jonathan CHU
+ * @author Fabien LAMBERT--DELAVAQUERIE
+ * @author Gérald LIN
+ */
 trait PersonAttribute {
     val name : String
 }

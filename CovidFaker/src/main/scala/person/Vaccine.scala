@@ -4,6 +4,13 @@ import person.URI.baseUri
 
 import scala.util.Random
 
+/**
+ * The Vaccine and SideEffects utilities.
+ * @author Ailton LOPES MENDES
+ * @author Jonathan CHU
+ * @author Fabien LAMBERT--DELAVAQUERIE
+ * @author Gérald LIN
+ */
 trait Vaccine {
     val percentage : Double
     val name : String
@@ -118,6 +125,11 @@ object Vaccine {
             override val sideCode: String = ""
         }
 
+        /**
+         * Will have the [[Vaccine]] probability to have a sideEffect.
+         * @param vaccine
+         * @return
+         */
         def hasSideEffect(vaccine: Vaccine) : Boolean = random.nextInt(100) <= vaccine.percentage
 
         private def seqOf() : Seq[SideEffects] = Seq(
@@ -126,6 +138,11 @@ object Vaccine {
             Lymphadenopathy, InjectionSiteTenderness
         )
 
+        /**
+         * Generates a random [[SideEffects]] if there's a [[SideEffects]].
+         * @param vaccine the [[Vaccine]]
+         * @return a [[SideEffects]] or [[Nil]].
+         */
         def randomSideEffect(vaccine: Vaccine) : SideEffects = {
             if (hasSideEffect(vaccine)) {
                 val seq = seqOf()

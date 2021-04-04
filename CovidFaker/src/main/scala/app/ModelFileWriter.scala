@@ -1,9 +1,14 @@
 package app
-
 import org.apache.jena.rdf.model.Model
-
 import java.io.FileOutputStream
 
+/**
+ * Will write the data of a model in a file of a certain lang.
+ * @author Ailton LOPES MENDES
+ * @author Jonathan CHU
+ * @author Fabien LAMBERT--DELAVAQUERIE
+ * @author Gérald LIN
+ */
 object ModelFileWriter {
     /***
      * Writes the file in our resources directory. Will create the file if it does not exist.

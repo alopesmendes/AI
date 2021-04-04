@@ -1,5 +1,12 @@
 package person
 
+/**
+ * The URI object will contain the URI.
+ * @author Ailton LOPES MENDES
+ * @author Jonathan CHU
+ * @author Fabien LAMBERT--DELAVAQUERIE
+ * @author Gérald LIN
+ */
 object URI {
     val baseUri = "http://extension.group1.fr/onto#"
 
