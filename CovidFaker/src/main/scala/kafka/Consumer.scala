@@ -35,7 +35,7 @@ object Consumer {
         properties
     }
 
-    val consumer = new KafkaConsumer[String, String](streamConsumer)
+    val consumer = new KafkaConsumer[String, Any](streamConsumer)
 
 
 
@@ -45,20 +45,35 @@ object Consumer {
      */
     def consumeDisplay(list: util.List[String]) : Unit = {
         consumer.subscribe(list)
+        val mutableMap = collection.mutable.Map[String, collection.mutable.Map[String, Any]]()
         while (true) {
             val consumerRecord = consumer.poll(100)
             if (consumerRecord.isEmpty) {
+                //println(s"size:${mutableMap.size}")
+                mutableMap.foreach(topicsValues => {
+                    println(s"topic:${topicsValues._1} {")
+                    topicsValues._2.foreach(recordValues => println(s"\tkey:${recordValues._1}, values:${recordValues._2}"))
+                    println("}")
+                })
                 return
             }
             consumerRecord.forEach(record => {
+                val m = mutableMap.getOrElse(
+                    record.topic(), collection.mutable.Map[String, Any]())
+                m.getOrElseUpdate(record.key(), record.value())
+                mutableMap.getOrElseUpdate(record.topic(), m)
+
+                /*
                 println(s"topic:${record.topic()} {")
                 println(s"\tkey:${record.key()}, value:${record.value()}")
                 println(s"\tpartition:${record.partition()}, offset:${record.offset()}")
                 println("}")
 
+                */
+
+
             })
             consumer.commitAsync()
         }
-
     }
 }
