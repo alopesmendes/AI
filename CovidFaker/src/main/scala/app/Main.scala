@@ -12,7 +12,7 @@ import person.URI.{persons, typeProperty}
 import person.Vaccine.SideEffects
 import person.{PersonAttribute, Vaccine}
 
-import java.util
+import java.time.Year
 import java.util.concurrent.CountDownLatch
 import scala.annotation.tailrec
 import scala.jdk.CollectionConverters.CollectionHasAsScala
@@ -144,8 +144,9 @@ object Main extends App {
         }
     )
 
-
-    Consumer.consumeDisplay(util.Arrays.asList(outputFilterTopic, outputCountTopic))
+    val years = yearsInterval(10)
+    val mapOfYears = selectCountMap(years)
+    Consumer.consumeDisplay(listOfOutputTopics(mapOfYears))
 
     val latch: CountDownLatch = new CountDownLatch(1)
 
@@ -154,30 +155,49 @@ object Main extends App {
     val topicStream2: KStream[String, String] = builder.stream(inputTopic2, Consumed.`with`(Serdes.String, Serdes.String))
     val source = topicStream1.merge(topicStream2)
 
-
-    KStreamUtils.siderCodeStream(source, outputFilterTopic,
-        (key, value) => mapper.readTree(value).get("sideEffectCode").toString.equals("\"C0027497\"")
+    /*
+    Filter the code
+    val codeFilter =  KStreamUtils.filter(source,
+        (_, value) => {
+            val jsonTree = mapper.readTree(value)
+            jsonTree.has("sideEffectCode") && jsonTree.get("sideEffectCode").asText().equals("C0027497")
+        }
     )
 
+    codeFilter.to(outputFilterTopic, Produced.`with`(Serdes.String, Serdes.String))
+    */
 
-
-    val sideEffectsStream = KStreamUtils.transform(source,
-        (_, value) => s"${mapper.readTree(value).get("sideEffectCode")}"
+    val sideEffectsStream = KStreamUtils.transform(
+        source,
+        (_, value) => s"${mapper.readTree(value).get("sideEffectCode").asText()}"
     )
 
     val perVaccine = KStreamUtils.transform(
-        sideEffectsStream,
-        (key, value) => s"$key/${mapper.readTree(value).get("vaccine")}")
+        source,
+        (_, value) => s"${mapper.readTree(value).get("vaccine").asText()}")
+
+    val joinStream = KStreamUtils.joinStream(sideEffectsStream, perVaccine)
+
+    val intervals = PersonAttribute.Birthday.everyIntervalOfYearsStream(source, years, 10)
 
 
-    val counts = KStreamUtils.countStream(perVaccine,
-        (key: String, v: String) => {
-            val array = key.split("/").toList
-            array(1)
-        })
-    counts.to(outputCountTopic, Produced.`with`(Serdes.String, Serdes.Long))
+    val mapOfStreams = intervals
+    .map(entry => (entry._1, KStreamUtils.joinStream(joinStream, entry._2)))
+    .map(entry => (entry._1, KStreamUtils.countStream(entry._2,
+        (_: String, v: String) => {
+            val array = v.split("/").toList
+            s"${entry._1}/${array.head}/${array(1)}"
+        }
+    )))
 
-    val streams = new KafkaStreams(builder.build, props)
+    for (i <- 1950 to 2000 by 10) {
+        val year = Year.of(i)
+        mapOfStreams(year).to(mapOfYears.getOrElse(year, s"$outputCountTopic-$year"), Produced.`with`(Serdes.String, Serdes.Long))
+    }
+
+    val topology = builder.build
+
+    val streams = new KafkaStreams(topology, props)
 
     // attach shutdown handler to catch control-c
     Runtime.getRuntime.addShutdownHook(new Thread("streams-shutdown-hook") {

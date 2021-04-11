@@ -75,7 +75,7 @@ object Producer {
         val record = new ProducerRecord[String, String](topic, "key", json)
         producer.send( record )
 
-        println("producing " + json)
+        //println("producing " + json)
 
     }
 }
